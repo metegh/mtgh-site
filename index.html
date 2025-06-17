@@ -134,7 +134,8 @@
       margin-top: 200px;
       padding: 60px 30px;
       background-color: rgba(0, 0, 0, 0.6);
-      box-shadow: inset 0 8px 20px -5px #b67dff;
+      box-shadow: inset 0 8px 20px -5px #b67dff, 
+                  inset 0 -8px 20px -5px #b67dff;
     }
 
     #catalog h2 {
@@ -209,12 +210,13 @@
       border: 2px solid white;
     }
 
-    /* New About Me Section */
+    /* About Me Section */
     #about {
       margin-top: 100px;
       padding: 60px 30px;
       background-color: rgba(0, 0, 0, 0.6);
-      box-shadow: inset 0 -8px 20px -5px #b67dff;
+      box-shadow: inset 0 8px 20px -5px #b67dff,
+                  inset 0 -8px 20px -5px #b67dff;
       text-align: center;
       color: #d9c7ff;
     }
@@ -245,6 +247,80 @@
       border-radius: 50%;
       border: 3px solid #a56dff;
       object-fit: cover;
+    }
+
+    /* Script Copy Section */
+    .script-section {
+      margin: 50px auto;
+      padding: 30px;
+      background-color: rgba(45, 0, 80, 0.6);
+      border-radius: 12px;
+      text-align: center;
+      max-width: 800px;
+      box-shadow: 0 0 20px rgba(93, 50, 163, 0.7);
+      border: 1px solid #a56dff;
+    }
+
+    .script-section h3 {
+      color: #d3a7ff;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .script-section .supported {
+      font-size: 0.9rem;
+      color: #b583ff;
+      margin-top: 15px;
+      line-height: 1.4;
+    }
+
+    .copy-btn {
+      display: inline-block;
+      padding: 12px 30px;
+      margin-top: 15px;
+      background: linear-gradient(135deg, #a56dff, #8a4dff);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(165, 109, 255, 0.4);
+      font-size: 1.1rem;
+    }
+
+    .copy-btn:hover {
+      background: linear-gradient(135deg, #b583ff, #9d5eff);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(197, 155, 255, 0.6);
+    }
+
+    .copy-btn:active {
+      transform: translateY(1px);
+    }
+
+    /* New Webhook Info Section */
+    .webhook-info {
+      margin: 30px auto;
+      padding: 25px;
+      background-color: rgba(45, 0, 80, 0.5);
+      border-radius: 12px;
+      max-width: 800px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(93, 50, 163, 0.5);
+    }
+
+    .webhook-info h3 {
+      color: #d3a7ff;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    .webhook-info p {
+      color: #b583ff;
+      margin-bottom: 10px;
+      font-size: 1rem;
     }
   </style>
 </head>
@@ -283,13 +359,22 @@
       </div>
     </section>
 
-    <!-- New About Me Section -->
+    <!-- Script Copy Section -->
+    <div class="script-section">
+      <h3>Rebellion Hub?</h3>
+      <button class="copy-btn" onclick="copyScript()">Copy Free Script</button>
+      <p class="supported">My script hub in roblox<br>
+      Supported games: Slap Battles</br>
+      Supported Injectors: Swift, krnl, awp, zenith, velocity</p>
+    </div>
+
+    <!-- About Me Section -->
     <section id="about">
       <h2>About Me</h2>
       <div class="content">
         <img src="metegh.gif" alt="My Avatar" class="avatar-large">
         <div class="text">
-          <p>I am an average scripter with +- 1 year of experience. I mainly create scripts for roblox injectors, for example on SlapBattles. Sometimes I write bots for discord on python.</p>
+          <p>I am an average scripter with +- 1 year of experience. I mainly create scripts for Roblox injectors, for example on Slap Battles. Sometimes I write bots for Discord using Python.</p>
           <p>My main work is with modeling, not with code.</p>
         </div>
       </div>
@@ -305,6 +390,30 @@
       } else {
         alert('Incorrect code');
       }
+    }
+
+    function copyScript() {
+      const script = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/metegh/SlapBattles/refs/heads/main/SlapBattlesProto",true))()';
+      navigator.clipboard.writeText(script)
+        .then(() => {
+          const btn = document.querySelector('.copy-btn');
+          btn.textContent = 'Copied!';
+          btn.style.background = 'linear-gradient(135deg, #4CAF50, #2E7D32)';
+          setTimeout(() => {
+            btn.textContent = 'Copy Script';
+            btn.style.background = 'linear-gradient(135deg, #a56dff, #8a4dff)';
+          }, 2000);
+        })
+        .catch(err => {
+          console.error('Failed to copy: ', err);
+          const textarea = document.createElement('textarea');
+          textarea.value = script;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          alert('Script copied to clipboard!');
+        });
     }
   </script>
 </body>
