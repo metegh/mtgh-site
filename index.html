@@ -184,10 +184,16 @@
       margin-bottom: 15px;
     }
 
+    .card .buttons-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
     .card a.download-btn {
       display: inline-block;
       padding: 10px 20px;
-      margin-top: 10px;
       background-color: #a56dff;
       color: white;
       text-decoration: none;
@@ -197,6 +203,46 @@
 
     .card a.download-btn:hover {
       background-color: #c59bff;
+    }
+
+    .card .info-btn {
+      position: relative;
+      display: inline-block;
+      padding: 10px;
+      background-color: rgba(130, 50, 255, 0.2);
+      color: white;
+      border-radius: 8px;
+      border: 2px solid #a56dff;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .card .info-btn:hover {
+      background-color: rgba(165, 109, 255, 0.3);
+    }
+
+    .card .info-btn .tooltip {
+      visibility: hidden;
+      width: 200px;
+      background-color: rgba(45, 0, 80, 0.9);
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 10px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      border: 1px solid #a56dff;
+      box-shadow: 0 0 10px rgba(165, 109, 255, 0.5);
+    }
+
+    .card .info-btn:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
     }
 
     .avatar {
@@ -299,29 +345,6 @@
     .copy-btn:active {
       transform: translateY(1px);
     }
-
-    /* New Webhook Info Section */
-    .webhook-info {
-      margin: 30px auto;
-      padding: 25px;
-      background-color: rgba(45, 0, 80, 0.5);
-      border-radius: 12px;
-      max-width: 800px;
-      text-align: center;
-      box-shadow: 0 0 15px rgba(93, 50, 163, 0.5);
-    }
-
-    .webhook-info h3 {
-      color: #d3a7ff;
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-    }
-
-    .webhook-info p {
-      color: #b583ff;
-      margin-bottom: 10px;
-      font-size: 1rem;
-    }
   </style>
 </head>
 <body>
@@ -354,7 +377,35 @@
           <h3>Webhook Spammer</h3>
           <img src="tool1.png" alt="Webhook Spammer">
           <p>Webhook spammer. Python need!</p>
-          <a class="download-btn" href="https://mega.nz/file/LN02Tb6Y#bg9DLbtPukPqV_-hLrQr5ftgruu4dXA_r8lep742-G0" target="_blank">Download</a>
+          <div class="buttons-container">
+            <a class="download-btn" href="https://mega.nz/file/LN02Tb6Y#bg9DLbtPukPqV_-hLrQr5ftgruu4dXA_r8lep742-G0" target="_blank">Download</a>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h3>Swift</h3>
+          <img src="tool2.png" alt="Swift Executor">
+          <p>Roblox Windows Executor | Bannable</p>
+          <div class="buttons-container">
+            <a class="info-btn" href="https://discord.gg/getswiftgg" target="_blank">
+              <span class="tooltip">Swift discord server</span>
+              📌
+            </a>
+            <a class="download-btn" href="#" target="_blank">Download</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>KRNL</h3>
+          <img src="tool3.png" alt="KRNL Executor">
+          <p>Roblox APK Executor | Undetected</p>
+          <div class="buttons-container">
+            <a class="info-btn" href="https://discord.gg/48cSR6w8bC" target="_blank">
+              <span class="tooltip">KRNL discord server</span>
+              📌
+            </a>
+            <a class="download-btn" href="#" target="_blank">Download</a>
+          </div>
         </div>
       </div>
     </section>
