@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MTGH</title>
+  <link rel="icon" type="image/png" href="avatar.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none;
+      scroll-behavior: smooth;
+    }
+
+    body, html {
+      height: 100%;
+      overflow-x: hidden;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: url('bg.gif') no-repeat center center fixed;
+      background-size: cover;
+      z-index: -3;
+    }
+
+    .mask {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: url('mask.png') no-repeat center center;
+      background-size: contain;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .login {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 40px;
+      border-radius: 12px;
+      text-align: center;
+      color: #d9c7ff;
+      box-shadow: 0 0 15px #7f44d4;
+    }
+
+    .login h2 {
+      margin-bottom: 20px;
+    }
+
+    .login input[type="password"] {
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      width: 200px;
+      margin-bottom: 20px;
+      font-size: 1rem;
+    }
+
+    .login button {
+      padding: 10px 20px;
+      background-color: #a56dff;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .container {
+      text-align: center;
+      color: #d9c7ff;
+      padding-top: 15vh;
+    }
+
+    .container h1 {
+      font-size: 4rem;
+      color: #b583ff;
+      text-shadow: 0 0 10px #c38bff;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .container h1:hover {
+      text-shadow: 0 0 20px #e0b3ff;
+      transform: translateY(-5px);
+    }
+
+    .buttons {
+      margin-top: 30px;
+    }
+
+    .buttons a {
+      text-decoration: none;
+      margin: 0 10px;
+      padding: 12px 25px;
+      font-weight: bold;
+      border-radius: 8px;
+      background-color: rgba(130, 50, 255, 0.2);
+      color: #fff;
+      border: 2px solid #a56dff;
+      transition: 0.3s;
+    }
+
+    .buttons a:hover {
+      background-color: #a56dff;
+      color: black;
+    }
+
+    #catalog {
+      margin-top: 200px;
+      padding: 60px 30px;
+      background-color: rgba(0, 0, 0, 0.6);
+      box-shadow: inset 0 8px 20px -5px #b67dff;
+    }
+
+    #catalog h2 {
+      color: #dcbfff;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background-color: rgba(45, 0, 80, 0.6);
+      padding: 30px;
+      border-radius: 16px;
+      width: 400px;
+      color: white;
+      box-shadow: 0 0 15px #5d32a3;
+      transition: transform 0.3s ease;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card h3 {
+      color: #d3a7ff;
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .card p {
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+    }
+
+    .card a.download-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-top: 10px;
+      background-color: #a56dff;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+
+    .card a.download-btn:hover {
+      background-color: #c59bff;
+    }
+
+    .avatar {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      z-index: 10;
+      border: 2px solid white;
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+  <div class="mask"></div>
+
+  <div id="login" class="login">
+    <h2>Enter Access Code</h2>
+    <input type="password" id="codeInput" placeholder="Access Code">
+    <br>
+    <button onclick="checkCode()">Submit</button>
+  </div>
+
+  <div id="siteContent" class="hidden">
+    <img src="avatar.png" alt="MTGH Logo" class="avatar" />
+
+    <div class="container">
+      <h1>MTGH</h1>
+      <div class="buttons">
+        <a href="#catalog">Browse Catalog</a>
+        <a href="https://discord.gg/XPZQGf8Tse" target="_blank">Join Discord</a>
+        <a href="https://www.python.org/downloads/" target="_blank">Install Python</a>
+      </div>
+    </div>
+
+    <section id="catalog">
+      <h2>Catalog</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Webhook Spammer</h3>
+          <img src="tool1.png" alt="Webhook Spammer">
+          <p>Webhook spammer. Python need!</p>
+          <a class="download-btn" href="https://mega.nz/file/LN02Tb6Y#bg9DLbtPukPqV_-hLrQr5ftgruu4dXA_r8lep742-G0" target="_blank">Download</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function checkCode() {
+      const input = document.getElementById('codeInput').value;
+      if (input === 'MTGHVersionOf1Star') {
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('siteContent').classList.remove('hidden');
+      } else {
+        alert('Incorrect code');
+      }
+    }
+  </script>
+</body>
+</html>
