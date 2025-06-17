@@ -54,14 +54,14 @@
     text-align: center;
     color: #d9c7ff;
     box-shadow: 0 0 15px #7f44d4;
-    transition: all 0.3s ease; /* Добавляем плавный переход для всех свойств */
-}
+    transition: all 0.3s ease;
+    }
 
-.login:hover {
-  transform: translate(-50%, -50%) scale(1.05); /* Увеличиваем на 5% */
-  box-shadow: 0 0 25px #a56dff; /* Усиливаем свечение */
-  background-color: rgba(0, 0, 0, 0.75); /* Слегка затемняем фон */
-}
+    .login:hover {
+      transform: translate(-50%, -50%) scale(1.05);
+      box-shadow: 0 0 25px #a56dff;
+      background-color: rgba(0, 0, 0, 0.75);
+    }
 
     .login h2 {
       margin-bottom: 20px;
@@ -208,6 +208,44 @@
       z-index: 10;
       border: 2px solid white;
     }
+
+    /* New About Me Section */
+    #about {
+      margin-top: 100px;
+      padding: 60px 30px;
+      background-color: rgba(0, 0, 0, 0.6);
+      box-shadow: inset 0 -8px 20px -5px #b67dff;
+      text-align: center;
+      color: #d9c7ff;
+    }
+
+    #about h2 {
+      color: #dcbfff;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+    }
+
+    #about .content {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    #about .text {
+      text-align: left;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    #about .avatar-large {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 3px solid #a56dff;
+      object-fit: cover;
+    }
   </style>
 </head>
 <body>
@@ -241,6 +279,18 @@
           <img src="tool1.png" alt="Webhook Spammer">
           <p>Webhook spammer. Python need!</p>
           <a class="download-btn" href="https://mega.nz/file/LN02Tb6Y#bg9DLbtPukPqV_-hLrQr5ftgruu4dXA_r8lep742-G0" target="_blank">Download</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- New About Me Section -->
+    <section id="about">
+      <h2>About Me</h2>
+      <div class="content">
+        <img src="metegh.gif" alt="My Avatar" class="avatar-large">
+        <div class="text">
+          <p>I am an average scripter with +- 1 year of experience. I mainly create scripts for roblox injectors, for example on SlapBattles. Sometimes I write bots for discord on python.</p>
+          <p>My main work is with modeling, not with code.</p>
         </div>
       </div>
     </section>
