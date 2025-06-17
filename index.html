@@ -43,40 +43,42 @@
       pointer-events: none;
     }
 
-    .login {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 40px;
-    border-radius: 12px;
-    text-align: center;
-    color: #d9c7ff;
-    box-shadow: 0 0 15px #7f44d4;
-    transition: all 0.3s ease;
+    .login-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 40px;
+      border-radius: 12px;
+      text-align: center;
+      color: #d9c7ff;
+      box-shadow: 0 0 15px #7f44d4;
+      transition: all 0.3s ease;
+      width: 350px;
     }
 
-    .login:hover {
+    .login-container:hover {
       transform: translate(-50%, -50%) scale(1.05);
       box-shadow: 0 0 25px #a56dff;
       background-color: rgba(0, 0, 0, 0.75);
     }
 
-    .login h2 {
+    .login-container h2 {
       margin-bottom: 20px;
     }
 
-    .login input[type="password"] {
+    .login-container input {
       padding: 10px;
       border: none;
       border-radius: 6px;
-      width: 200px;
-      margin-bottom: 20px;
+      width: 100%;
+      margin-bottom: 15px;
       font-size: 1rem;
+      background-color: rgba(255, 255, 255, 0.9);
     }
 
-    .login button {
+    .login-container button {
       padding: 10px 20px;
       background-color: #a56dff;
       border: none;
@@ -84,6 +86,43 @@
       color: white;
       cursor: pointer;
       font-weight: bold;
+      width: 100%;
+      margin-top: 10px;
+      transition: all 0.3s;
+    }
+
+    .login-container button:hover {
+      background-color: #b583ff;
+    }
+
+    .tab-buttons {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 10px;
+      background-color: rgba(130, 50, 255, 0.2);
+      border: none;
+      color: #d9c7ff;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .tab-btn.active {
+      background-color: #a56dff;
+      color: white;
+    }
+
+    .tab-btn:first-child {
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+    }
+
+    .tab-btn:last-child {
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
     }
 
     .hidden {
@@ -254,6 +293,39 @@
       border-radius: 50%;
       z-index: 10;
       border: 2px solid white;
+      cursor: pointer;
+    }
+
+    .user-info {
+      position: fixed;
+      top: 70px;
+      left: 10px;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 10px;
+      border-radius: 8px;
+      color: white;
+      z-index: 10;
+      display: none;
+      border: 1px solid #a56dff;
+    }
+
+    .user-info p {
+      margin: 5px 0;
+    }
+
+    .logout-btn {
+      background-color: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 5px;
+      font-size: 0.8rem;
+    }
+
+    .logout-btn:hover {
+      background-color: #ff5252;
     }
 
     /* About Me Section */
@@ -345,21 +417,101 @@
     .copy-btn:active {
       transform: translateY(1px);
     }
+
+    /* Avatar Upload */
+    .avatar-upload {
+      position: relative;
+      margin: 0 auto 15px;
+      width: 80px;
+    }
+
+    .avatar-upload img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px solid #a56dff;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+    .avatar-upload input {
+      display: none;
+    }
+
+    .avatar-upload label {
+      position: absolute;
+      bottom: -5px;
+      right: -5px;
+      background-color: #a56dff;
+      color: white;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    /* Error messages */
+    .error-message {
+      color: #ff6b6b;
+      font-size: 0.9rem;
+      margin-top: -10px;
+      margin-bottom: 10px;
+      display: none;
+    }
   </style>
 </head>
 <body>
   <div class="background"></div>
   <div class="mask"></div>
 
-  <div id="login" class="login">
+  <div id="authContainer" class="login-container">
+    <div class="tab-buttons">
+      <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+      <button class="tab-btn" onclick="switchTab('register')">Register</button>
+    </div>
+
+    <div id="loginTab" class="tab-content">
+      <h2>Login</h2>
+      <input type="text" id="loginUsername" placeholder="Username">
+      <input type="password" id="loginPassword" placeholder="Password">
+      <p id="loginError" class="error-message">Invalid username or password</p>
+      <button onclick="login()">Login</button>
+      <p style="margin-top: 15px; font-size: 0.9rem;">Or use <a href="#" onclick="useAccessCode()" style="color: #a56dff;">access code</a></p>
+    </div>
+
+    <div id="registerTab" class="tab-content hidden">
+      <h2>Register</h2>
+      <div class="avatar-upload">
+        <img id="registerAvatar" src="default-avatar.png" alt="Avatar">
+        <input type="file" id="avatarInput" accept="image/*">
+        <label for="avatarInput">+</label>
+      </div>
+      <input type="text" id="registerUsername" placeholder="Username">
+      <input type="password" id="registerPassword" placeholder="Password">
+      <input type="password" id="confirmPassword" placeholder="Confirm Password">
+      <p id="registerError" class="error-message">Passwords don't match or username is taken</p>
+      <button onclick="register()">Register</button>
+    </div>
+  </div>
+
+  <div id="accessCodeLogin" class="login-container hidden">
     <h2>Enter Access Code</h2>
     <input type="password" id="codeInput" placeholder="Access Code">
-    <br>
+    <p id="codeError" class="error-message">Incorrect access code</p>
     <button onclick="checkCode()">Submit</button>
+    <p style="margin-top: 15px; font-size: 0.9rem;">Or <a href="#" onclick="switchToRegularLogin()" style="color: #a56dff;">login with credentials</a></p>
   </div>
 
   <div id="siteContent" class="hidden">
-    <img src="avatar.png" alt="MTGH Logo" class="avatar" />
+    <img src="avatar.png" alt="User Avatar" class="avatar" id="userAvatar" onclick="toggleUserInfo()" />
+    <div class="user-info" id="userInfo">
+      <p>Welcome, <span id="displayUsername">User</span></p>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
 
     <div class="container">
       <h1>MTGH</h1>
@@ -433,14 +585,136 @@
   </div>
 
   <script>
+    // Check if user is already logged in
+    document.addEventListener('DOMContentLoaded', function() {
+      const loggedInUser = localStorage.getItem('loggedInUser');
+      if (loggedInUser) {
+        const user = JSON.parse(loggedInUser);
+        showSiteContent(user);
+      }
+      
+      // Set up avatar upload
+      const avatarInput = document.getElementById('avatarInput');
+      avatarInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            document.getElementById('registerAvatar').src = event.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    });
+
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent.toLowerCase().includes(tab)) {
+          btn.classList.add('active');
+        }
+      });
+
+      document.getElementById('loginTab').classList.toggle('hidden', tab !== 'login');
+      document.getElementById('registerTab').classList.toggle('hidden', tab !== 'register');
+      
+      // Clear errors when switching tabs
+      document.getElementById('loginError').style.display = 'none';
+      document.getElementById('registerError').style.display = 'none';
+    }
+
+    function useAccessCode() {
+      document.getElementById('authContainer').classList.add('hidden');
+      document.getElementById('accessCodeLogin').classList.remove('hidden');
+    }
+
+    function switchToRegularLogin() {
+      document.getElementById('authContainer').classList.remove('hidden');
+      document.getElementById('accessCodeLogin').classList.add('hidden');
+      document.getElementById('codeError').style.display = 'none';
+    }
+
+    function login() {
+      const username = document.getElementById('loginUsername').value;
+      const password = document.getElementById('loginPassword').value;
+      
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      const user = users.find(u => u.username === username && u.password === password);
+      
+      if (user) {
+        localStorage.setItem('loggedInUser', JSON.stringify(user));
+        showSiteContent(user);
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+      }
+    }
+
+    function register() {
+      const username = document.getElementById('registerUsername').value;
+      const password = document.getElementById('registerPassword').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      const avatar = document.getElementById('registerAvatar').src;
+      
+      if (password !== confirmPassword) {
+        document.getElementById('registerError').style.display = 'block';
+        return;
+      }
+      
+      let users = JSON.parse(localStorage.getItem('users')) || [];
+      
+      if (users.some(u => u.username === username)) {
+        document.getElementById('registerError').style.display = 'block';
+        return;
+      }
+      
+      const newUser = {
+        username,
+        password,
+        avatar,
+        registeredAt: new Date().toISOString()
+      };
+      
+      users.push(newUser);
+      localStorage.setItem('users', JSON.stringify(users));
+      localStorage.setItem('loggedInUser', JSON.stringify(newUser));
+      
+      showSiteContent(newUser);
+    }
+
     function checkCode() {
       const input = document.getElementById('codeInput').value;
       if (input === 'MTGHVersionOf1Star') {
-        document.getElementById('login').style.display = 'none';
-        document.getElementById('siteContent').classList.remove('hidden');
+        // Create a temporary guest user
+        const guestUser = {
+          username: 'Guest',
+          avatar: 'default-avatar.png',
+          isGuest: true
+        };
+        localStorage.setItem('loggedInUser', JSON.stringify(guestUser));
+        showSiteContent(guestUser);
       } else {
-        alert('Incorrect code');
+        document.getElementById('codeError').style.display = 'block';
       }
+    }
+
+    function showSiteContent(user) {
+      document.getElementById('authContainer').classList.add('hidden');
+      document.getElementById('accessCodeLogin').classList.add('hidden');
+      document.getElementById('siteContent').classList.remove('hidden');
+      
+      // Set user info
+      document.getElementById('displayUsername').textContent = user.username;
+      document.getElementById('userAvatar').src = user.avatar || 'default-avatar.png';
+    }
+
+    function toggleUserInfo() {
+      const userInfo = document.getElementById('userInfo');
+      userInfo.style.display = userInfo.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function logout() {
+      localStorage.removeItem('loggedInUser');
+      location.reload();
     }
 
     function copyScript() {
